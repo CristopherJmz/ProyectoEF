@@ -4,6 +4,14 @@
  * and open the template in the editor.
  */
 
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author CRISTOPHER
@@ -26,36 +34,227 @@ public class linea extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        TxtCodLin = new javax.swing.JTextField();
+        TxtNomLin = new javax.swing.JTextField();
+        TxtEstLin = new javax.swing.JTextField();
+        BtnAlta = new javax.swing.JButton();
+        BtnBaja = new javax.swing.JButton();
+        BtnCambio = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        TxtBuscar = new javax.swing.JTextField();
+        BtnBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
-        jLabel1.setText("lineas");
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Mantenimiento Lineas"));
+
+        jLabel2.setText("Código Línea:");
+
+        jLabel3.setText("Nombre Línea:");
+
+        jLabel4.setText("Estatus Línea:");
+
+        BtnAlta.setText("Alta");
+        BtnAlta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAltaActionPerformed(evt);
+            }
+        });
+
+        BtnBaja.setText("Baja");
+        BtnBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBajaActionPerformed(evt);
+            }
+        });
+
+        BtnCambio.setText("Cambio");
+        BtnCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCambioActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Código Línea:");
+
+        BtnBuscar.setText("Buscar");
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(BtnBuscar)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TxtCodLin)
+                            .addComponent(TxtNomLin, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(TxtEstLin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(108, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnAlta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnBaja)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnCambio)
+                .addGap(20, 20, 20))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(TxtCodLin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(TxtNomLin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(TxtEstLin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAlta)
+                    .addComponent(BtnBaja)
+                    .addComponent(BtnCambio))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(TxtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnBuscar))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(144, 144, 144)
-                .addComponent(jLabel1)
-                .addContainerGap(223, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addContainerGap(214, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAltaActionPerformed
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/sic", "root", "informaticdv2016");
+            PreparedStatement pst = cn.prepareStatement("insert into lineas values(?,?,?)");
+
+            pst.setString(1, TxtCodLin.getText().trim());
+            pst.setString(2, TxtNomLin.getText().trim());
+            pst.setString(3, TxtEstLin.getText().trim());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "REGISTRO REALIZADO!");
+            TxtCodLin.setText("");
+            TxtNomLin.setText("");
+            TxtEstLin.setText("");
+        }catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_BtnAltaActionPerformed
+
+    private void BtnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBajaActionPerformed
+        try {
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/sic", "root", "informaticdv2016");
+            PreparedStatement pst = cn.prepareStatement("delete from lineas where codigo_linea = ?");
+
+            pst.setString(1, TxtBuscar.getText().trim());
+            pst.executeUpdate();
+
+            TxtCodLin.setText("");
+            TxtNomLin.setText("");
+            TxtEstLin.setText("");
+            TxtBuscar.setText("");
+
+            JOptionPane.showMessageDialog(null, "REGISTRO REMOVIDO!");
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_BtnBajaActionPerformed
+
+    private void BtnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCambioActionPerformed
+        try {
+            String ID = TxtBuscar.getText().trim();
+
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/sic", "root", "informaticdv2016");
+            PreparedStatement pst = cn.prepareStatement("update lineas set nombre_linea = ?, estatus_linea = ? where codigo_linea = '" + ID + "'");
+
+            pst.setString(1, TxtNomLin.getText().trim());
+            pst.setString(2, TxtEstLin.getText().trim());
+            pst.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "MODIFICACION REALIZADA");
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_BtnCambioActionPerformed
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        try{
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/sic", "root", "informaticdv2016");
+            PreparedStatement pst = cn.prepareStatement("select * from lineas where codigo_linea = ?");
+            pst.setString(1, TxtBuscar.getText().trim());
+
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()){
+                TxtCodLin.setText(rs.getString("codigo_linea"));
+                TxtNomLin.setText(rs.getString("nombre_linea"));
+                TxtEstLin.setText(rs.getString("estatus_linea"));
+            } else {
+                JOptionPane.showMessageDialog(null, "LINEA NO REGISTRADA");
+            }
+
+        }catch (HeadlessException | SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton BtnAlta;
+    private javax.swing.JButton BtnBaja;
+    private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton BtnCambio;
+    private javax.swing.JTextField TxtBuscar;
+    private javax.swing.JTextField TxtCodLin;
+    private javax.swing.JTextField TxtEstLin;
+    private javax.swing.JTextField TxtNomLin;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
